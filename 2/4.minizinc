@@ -1,0 +1,15 @@
+% Use this editor as a MiniZinc scratch book
+include "globals.mzn";
+
+% массив из 6 чисел (числа билета)
+array[0..5] of var 0..9: n;
+
+% ограничение: все числа различны
+constraint alldifferent ([n[0], n[1], n[2], n[3], n[4], n[5]]);
+% ограничение: сумма первых трех чисел равна сумме последних трех чисел
+constraint sum(n[0..2]) == sum(n[3..5]);
+
+solve minimize (n[0] + n[1] + n[2]);
+
+% конкатенация строк
+output ["n: \(n)\n"];
